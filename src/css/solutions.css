@@ -1,0 +1,833 @@
+/* ==========================================================================
+   GRUPO NORTE — TECNOLOGIA EM MOVIMENTO (Seção de Soluções)
+   Direção de Arte: Institucional, Claro, Imponente e Minimalista (Apple-Grade)
+   Dois Momentos: 01 Manifesto Visual + Fio Condutor + 02 Os 4 Capítulos
+   ========================================================================== */
+
+.services-movement-section {
+  position: relative;
+  width: 100%;
+  background-color: var(--bg-solutions);
+  color: var(--color-body);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+}
+
+/* ==========================================================================
+   MOMENTO 01 — MANIFESTO VISUAL (Abertura de Alto Padrão Institucional)
+   ========================================================================== */
+
+.manifesto-moment-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 8.5rem 2.5rem 4.5rem 2.5rem;
+}
+
+.manifesto-editorial-grid {
+  display: grid;
+  grid-template-columns: 0.92fr 1.08fr;
+  gap: 4.5rem;
+  align-items: center;
+}
+
+/* Lado Esquerdo: Tipografia Monumental e Narrativa */
+.manifesto-text-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 2;
+}
+
+.manifesto-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+  margin-bottom: 2rem;
+}
+
+.manifesto-kicker-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--brand-accent);
+  border-radius: 50%;
+  box-shadow: 0 0 8px rgba(255, 106, 0, 0.4);
+}
+
+/* Headline Monumental Institucional em Azul-Marinho */
+.manifesto-headline {
+  display: flex;
+  flex-direction: column;
+  font-size: clamp(2.4rem, 4.3vw, 4.2rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.04em;
+  color: var(--color-heading);
+  margin-bottom: 2rem;
+}
+
+.headline-part {
+  display: block;
+}
+
+.headline-part.part-2 {
+  color: var(--color-heading);
+  padding-left: 0.5rem;
+}
+
+.headline-part.part-3 {
+  color: var(--brand-primary);
+}
+
+.manifesto-lead {
+  font-size: clamp(1.05rem, 1.25vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: -0.01em;
+  color: var(--color-body);
+  max-width: 520px;
+  margin-bottom: 2.75rem;
+  text-wrap: pretty;
+}
+
+/* Microdetalhe Gráfico: Linha fina de conexão com ponto de luz */
+.manifesto-connector-track {
+  position: relative;
+  width: 220px;
+  height: 2px;
+  background: var(--border-subtle);
+  border-radius: 2px;
+  overflow: visible;
+}
+
+.connector-line {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 60px;
+  background: linear-gradient(90deg, transparent, var(--brand-accent), transparent);
+  animation: lineScan 3.5s infinite linear;
+}
+
+.connector-pulse {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--brand-accent);
+  box-shadow: 0 0 8px var(--brand-accent);
+  animation: dotScan 3.5s infinite linear;
+}
+
+@keyframes lineScan {
+  0% { transform: translateX(-60px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(220px); opacity: 0; }
+}
+
+@keyframes dotScan {
+  0% { transform: translateX(0px); opacity: 0; }
+  20% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateX(220px); opacity: 0; }
+}
+
+/* Lado Direito: Foto Arquitetural Real da Sede (Sem overlays escuros pesados) */
+.manifesto-photo-stage {
+  position: relative;
+  width: 100%;
+}
+
+.manifesto-photo-wrapper {
+  position: relative;
+  width: 100%;
+  height: 480px;
+  border-radius: 20px;
+  overflow: hidden;
+  background-color: #F8FAFC;
+  border: 1px solid var(--border-subtle);
+  box-shadow: var(--shadow-display);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.4s ease;
+}
+
+.manifesto-photo-wrapper:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 32px 80px -15px rgba(10, 30, 43, 0.14);
+}
+
+.manifesto-office-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 25%;
+  display: block;
+  transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.manifesto-photo-wrapper:hover .manifesto-office-img {
+  transform: scale(1.02);
+}
+
+.manifesto-photo-glow {
+  display: none;
+}
+
+/* ==========================================================================
+   FIO CONDUTOR & PONTE EDITORIAL
+   ========================================================================== */
+
+.manifesto-services-bridge {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem 2rem 1.5rem;
+  position: relative;
+  user-select: none;
+}
+
+.fio-condutor-line {
+  position: relative;
+  width: 2px;
+  height: 60px;
+  background: linear-gradient(180deg, var(--border-subtle) 0%, rgba(255, 106, 0, 0.6) 60%, var(--brand-accent) 100%);
+  border-radius: 2px;
+  overflow: visible;
+}
+
+.fio-condutor-glow {
+  position: absolute;
+  top: 0;
+  left: -2px;
+  width: 6px;
+  height: 12px;
+  border-radius: 3px;
+  background: var(--brand-accent);
+  box-shadow: 0 0 10px var(--brand-accent);
+  animation: bridgePulseTravel 3s infinite linear;
+}
+
+@keyframes bridgePulseTravel {
+  0% { transform: translateY(-10px); opacity: 0; }
+  25% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { transform: translateY(60px); opacity: 0; }
+}
+
+.bridge-tagline-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 1.25rem;
+  margin-top: 1.25rem;
+}
+
+.bridge-dash {
+  width: 24px;
+  height: 1px;
+  background: var(--border-medium);
+}
+
+.bridge-tagline-text {
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  text-align: center;
+}
+
+/* ==========================================================================
+   MOMENTO 02 — OS 4 CAPÍTULOS DE SERVIÇO (Sticky Scroll Experience)
+   ========================================================================== */
+
+.movement-experience-container {
+  width: 100%;
+  max-width: 1360px;
+  margin: 0 auto;
+  padding: 2rem 2.5rem 9.5rem 2.5rem;
+}
+
+/* ==========================================================================
+   Navegação Editorial dos 4 Pilares (Sofisticada, Limpa, Sem Cápsulas/Pills)
+   ========================================================================== */
+
+.movement-progress-bar {
+  position: sticky;
+  top: 86px;
+  z-index: 30;
+  width: 100%;
+  max-width: 860px;
+  margin: 0 auto 4.5rem auto;
+  padding: 0.85rem 1.5rem;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border-medium);
+  border-top: 1px solid transparent;
+  box-shadow: 0 4px 20px -5px rgba(10, 30, 43, 0.05);
+}
+
+.progress-steps-list {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  gap: 1rem;
+}
+
+.progress-step-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 0.4rem 0.6rem;
+  color: var(--color-muted);
+  font-family: inherit;
+  font-size: 0.84rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  transition: color var(--transition-fast), transform var(--transition-fast);
+  outline: none;
+  white-space: nowrap;
+  position: relative;
+}
+
+.progress-step-btn:hover {
+  color: var(--brand-primary);
+}
+
+.progress-step-btn.active {
+  color: var(--brand-accent);
+  font-weight: 700;
+}
+
+.progress-step-btn .step-num {
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  font-variant-numeric: tabular-nums;
+  transition: color var(--transition-fast);
+}
+
+.progress-step-btn.active .step-num {
+  color: var(--brand-accent);
+}
+
+.progress-step-btn .step-label {
+  transition: color var(--transition-fast);
+}
+
+.step-divider-line {
+  flex: 1;
+  height: 1px;
+  background: var(--border-medium);
+  position: relative;
+  overflow: hidden;
+  min-width: 24px;
+}
+
+.step-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 0%;
+  background: var(--brand-accent);
+  transition: width 0.4s ease;
+}
+
+.step-fill.filled {
+  width: 100%;
+}
+
+/* ==========================================================================
+   MOMENTO 02 — OS 4 CAPÍTULOS DE ATUAÇÃO (DIREÇÃO DE ARTE COM LOGOS)
+   Apresentação em 4 grandes blocos editoriais, cada um com sua logo oficial,
+   atmosfera sutil de cor, marca d'água monumental e lista com linhas finas.
+   ========================================================================== */
+
+.movement-pillars-showcase {
+  display: flex;
+  flex-direction: column;
+  gap: 4.5rem;
+  width: 100%;
+}
+
+/* Bloco de Cada Capítulo / Pilar */
+.pillar-chapter-block {
+  position: relative;
+  width: 100%;
+  border-radius: 28px;
+  overflow: hidden;
+  padding: 4.75rem 4.5rem 5.25rem 4.5rem;
+  background: #ffffff;
+  border: 1px solid var(--border-subtle);
+  box-shadow: 0 4px 24px -6px rgba(10, 30, 43, 0.04);
+  outline: none;
+  transition: 
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+/* Atmosferas Sutis para Cada Unidade (Variação de 1% a 2% de cor sobre o branco) */
+.pillar-chapter-block.pillar-dev {
+  background: linear-gradient(145deg, #ffffff 0%, #f6f9fc 100%);
+  border-color: rgba(17, 24, 31, 0.09);
+  --pillar-accent: #1D4ED8;
+  --pillar-accent-rgb: 29, 78, 216;
+}
+
+.pillar-chapter-block.pillar-auto {
+  background: linear-gradient(145deg, #ffffff 0%, #f3f8f9 100%);
+  border-color: rgba(5, 47, 56, 0.09);
+  --pillar-accent: #0D9488;
+  --pillar-accent-rgb: 13, 148, 136;
+}
+
+.pillar-chapter-block.pillar-crm {
+  background: linear-gradient(145deg, #ffffff 0%, #f7f8fa 100%);
+  border-color: rgba(63, 75, 85, 0.09);
+  --pillar-accent: #475569;
+  --pillar-accent-rgb: 71, 85, 105;
+}
+
+.pillar-chapter-block.pillar-mkt {
+  background: linear-gradient(145deg, #ffffff 0%, #f7faf3 100%);
+  border-color: rgba(147, 198, 72, 0.16);
+  --pillar-accent: #70A526;
+  --pillar-accent-rgb: 112, 165, 38;
+}
+
+/* Hover e Foco nos Blocos */
+.pillar-chapter-block:hover,
+.pillar-chapter-block.active {
+  transform: translateY(-2px);
+  border-color: rgba(var(--pillar-accent-rgb), 0.28);
+  box-shadow: 
+    0 24px 56px -18px rgba(var(--pillar-accent-rgb), 0.09),
+    0 2px 8px rgba(10, 30, 43, 0.03);
+}
+
+/* Marca d'Água Arquitetural da Logo Oficial do Pilar (Baixa Opacidade: ~4%) */
+.pillar-watermark-frame {
+  position: absolute;
+  right: -5%;
+  bottom: -15%;
+  width: clamp(400px, 40vw, 560px);
+  height: auto;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+}
+
+.pillar-watermark-img {
+  width: 100%;
+  height: auto;
+  opacity: 0.045;
+  transform: rotate(-8deg);
+  display: block;
+  filter: none;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.pillar-chapter-block:hover .pillar-watermark-img,
+.pillar-chapter-block.active .pillar-watermark-img {
+  opacity: 0.07;
+  transform: rotate(-6deg) scale(1.02);
+}
+
+/* Numeral Monumental Integrado ao Fundo */
+.pillar-huge-num {
+  position: absolute;
+  top: 2rem;
+  right: 3.5rem;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(6.5rem, 11vw, 12rem);
+  font-weight: 900;
+  line-height: 0.75;
+  letter-spacing: -0.06em;
+  color: var(--brand-primary);
+  opacity: 0.035;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+  font-variant-numeric: tabular-nums;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+}
+
+.pillar-chapter-block:hover .pillar-huge-num,
+.pillar-chapter-block.active .pillar-huge-num {
+  opacity: 0.06;
+  transform: translateY(-4px);
+}
+
+/* Grade Interna de Duas Colunas */
+.pillar-chapter-inner {
+  position: relative;
+  z-index: 2;
+  display: grid;
+  grid-template-columns: 1.15fr 0.85fr;
+  gap: 5rem;
+  align-items: start;
+}
+
+/* Coluna Primária: Identidade e Apresentação da Unidade */
+.pillar-primary-column {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.pillar-emblem-wrapper {
+  height: 74px;
+  display: flex;
+  align-items: center;
+  margin-bottom: 2.25rem;
+}
+
+.pillar-emblem-logo {
+  height: 100%;
+  width: auto;
+  max-width: 90px;
+  object-fit: contain;
+  display: block;
+  filter: none;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.pillar-chapter-block:hover .pillar-emblem-logo {
+  transform: scale(1.04);
+}
+
+.pillar-meta-row {
+  margin-bottom: 0.85rem;
+}
+
+.pillar-index-tag {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--pillar-accent);
+}
+
+.pillar-title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2.3rem, 3.5vw, 3.4rem);
+  font-weight: 800;
+  letter-spacing: -0.035em;
+  color: var(--color-heading);
+  line-height: 1.12;
+  margin-bottom: 1.5rem;
+}
+
+.pillar-description {
+  font-size: clamp(1.0625rem, 1.25vw, 1.2rem);
+  font-weight: 400;
+  line-height: 1.75;
+  letter-spacing: -0.012em;
+  color: var(--color-body);
+  max-width: 530px;
+  text-wrap: pretty;
+}
+
+/* Coluna de Soluções com Linhas Finas */
+.pillar-services-column {
+  display: flex;
+  flex-direction: column;
+  padding-top: 1.25rem;
+}
+
+.pillar-services-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-bottom: 1.1rem;
+  border-bottom: 1px solid rgba(10, 30, 43, 0.12);
+  margin-bottom: 0.25rem;
+}
+
+.pillar-services-label {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+.pillar-services-count {
+  font-family: 'SF Mono', Monaco, monospace;
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: var(--pillar-accent);
+}
+
+.pillar-services-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.pillar-service-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid rgba(10, 30, 43, 0.08);
+  cursor: pointer;
+  transition: 
+    border-color 0.25s ease,
+    padding 0.25s ease;
+}
+
+.pillar-service-item:hover {
+  border-bottom-color: var(--pillar-accent);
+  padding-left: 0.35rem;
+}
+
+.service-name {
+  font-size: clamp(0.95rem, 1.15vw, 1.0625rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  color: var(--color-heading);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.service-arrow {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--color-muted);
+  transition: color 0.25s ease, transform 0.25s ease;
+}
+
+.pillar-service-item:hover .service-name {
+  color: var(--brand-primary);
+  transform: translateX(3px);
+}
+
+.pillar-service-item:hover .service-arrow {
+  color: var(--pillar-accent);
+  transform: translate(3px, -3px);
+}
+
+/* ==========================================================================
+   RESPONSIVIDADE & BREAKPOINTS
+   ========================================================================== */
+
+@media (min-width: 1440px) {
+  .manifesto-moment-container,
+  .movement-experience-container {
+    max-width: 1400px;
+  }
+
+  .manifesto-photo-wrapper {
+    height: 520px;
+  }
+
+  .pillar-chapter-block {
+    padding: 5.25rem 5rem 5.75rem 5rem;
+  }
+}
+
+@media (max-width: 1200px) {
+  .manifesto-editorial-grid {
+    gap: 3.5rem;
+  }
+
+  .manifesto-photo-wrapper {
+    height: 420px;
+  }
+
+  .pillar-chapter-block {
+    padding: 3.75rem 3rem 4.25rem 3rem;
+  }
+
+  .pillar-chapter-inner {
+    gap: 3.5rem;
+  }
+}
+
+@media (max-width: 1024px) {
+  .manifesto-moment-container {
+    padding: 6rem 2rem 3.5rem 2rem;
+  }
+
+  .manifesto-editorial-grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+
+  .manifesto-photo-wrapper {
+    height: 380px;
+    max-width: 680px;
+  }
+
+  .movement-experience-container {
+    padding: 2rem 2rem 6.5rem 2rem;
+  }
+
+  .movement-progress-bar {
+    top: 76px;
+    margin-bottom: 3.5rem;
+    overflow-x: auto;
+    scrollbar-width: none;
+  }
+
+  .movement-progress-bar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .movement-pillars-showcase {
+    gap: 3.5rem;
+  }
+
+  .pillar-chapter-block {
+    padding: 3.25rem 2.5rem 3.75rem 2.5rem;
+    border-radius: 22px;
+  }
+
+  .pillar-chapter-inner {
+    grid-template-columns: 1fr;
+    gap: 2.75rem;
+  }
+
+  .pillar-services-column {
+    padding-top: 0;
+  }
+}
+
+@media (max-width: 768px) {
+  .manifesto-moment-container {
+    padding: 4.5rem 1.25rem 2.5rem 1.25rem;
+  }
+
+  .manifesto-headline {
+    font-size: 2.15rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .manifesto-lead {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 2rem;
+  }
+
+  .manifesto-photo-wrapper {
+    height: 270px;
+    border-radius: 16px;
+  }
+
+  .manifesto-services-bridge {
+    padding: 2rem 1rem 1.5rem 1rem;
+  }
+
+  .fio-condutor-line {
+    height: 45px;
+  }
+
+  .bridge-tagline-text {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+  }
+
+  .movement-experience-container {
+    padding: 1.5rem 1.25rem 5rem 1.25rem;
+  }
+
+  .movement-progress-bar {
+    padding: 0.65rem 0.75rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .progress-step-btn .step-label {
+    display: none;
+  }
+
+  .progress-step-btn {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.8rem;
+  }
+
+  .step-divider-line {
+    min-width: 14px;
+  }
+
+  .movement-pillars-showcase {
+    gap: 2.5rem;
+  }
+
+  .pillar-chapter-block {
+    padding: 2.5rem 1.5rem 3rem 1.5rem;
+    border-radius: 18px;
+  }
+
+  .pillar-emblem-wrapper {
+    height: 60px;
+    margin-bottom: 1.5rem;
+  }
+
+  .pillar-title {
+    font-size: 1.9rem;
+    margin-bottom: 1.15rem;
+  }
+
+  .pillar-huge-num {
+    font-size: 4.5rem;
+    top: 1.25rem;
+    right: 1.25rem;
+  }
+
+  .pillar-watermark-frame {
+    width: 280px;
+    right: -15%;
+    bottom: -10%;
+  }
+
+  .pillar-description {
+    font-size: 0.96rem;
+    line-height: 1.65;
+  }
+}
+
+@media (max-width: 430px) {
+  .manifesto-headline {
+    font-size: 1.85rem;
+  }
+
+  .manifesto-photo-wrapper {
+    height: 230px;
+  }
+
+  .pillar-chapter-block {
+    padding: 2.25rem 1.15rem 2.5rem 1.15rem;
+  }
+
+  .pillar-title {
+    font-size: 1.6rem;
+  }
+
+  .pillar-huge-num {
+    font-size: 3.6rem;
+  }
+
+  .service-name {
+    font-size: 0.9rem;
+  }
+}
+

@@ -1,0 +1,304 @@
+/* ==========================================================================
+   GRUPO NORTE — Galeria Contínua de Marcas
+   "Empresas que Confiam no Grupo Norte"
+   Direção de Arte: Editorial Minimalista, Superfície Clara Tonalizada, Sem Cápsulas
+   1 Única Linha Contínua em Faixa Institucional de Fundo Claro Refinado
+   ========================================================================== */
+
+.clients-institutional-section {
+  position: relative;
+  width: 100%;
+  padding: 4.5rem 0 5rem 0;
+  background-color: var(--bg-clients);
+  border-top: 1px solid var(--border-subtle);
+  border-bottom: 1px solid var(--border-subtle);
+  overflow: hidden;
+  z-index: 10;
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   1. Cabeçalho Institucional (Discreto, Editorial, Tracking Generoso)
+   ========================================================================== */
+
+.clients-header-center {
+  max-width: var(--container-width);
+  margin: 0 auto 3rem auto;
+  padding: 0 2rem;
+  text-align: center;
+}
+
+.clients-caption-title {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.75rem;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-muted);
+}
+
+/* Detalhe discreto da identidade Grupo Norte no título */
+.clients-caption-title::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background-color: var(--brand-accent);
+}
+
+/* ==========================================================================
+   2. Viewport com Máscara de Gradiente Suave nas Laterais (Fade Infinito)
+   ========================================================================== */
+
+.clients-marquee-viewport {
+  position: relative;
+  width: 100%;
+  max-width: 100vw;
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 7%,
+    black 93%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    black 7%,
+    black 93%,
+    transparent 100%
+  );
+  padding: 0.5rem 0;
+}
+
+/* Trilho de Movimento Linear Contínuo (1 ÚNICA LINHA HORIZONTAL DA DIREITA P/ ESQUERDA) */
+.clients-marquee-track {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: center !important;
+  gap: 72px;
+  flex-shrink: 0 !important;
+  width: max-content !important;
+  white-space: nowrap !important;
+  will-change: transform;
+  animation: marqueeLinearFlow 48s linear infinite !important;
+}
+
+@keyframes marqueeLinearFlow {
+  0% {
+    transform: translate3d(0, 0, 0);
+  }
+  100% {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+/* ==========================================================================
+   3. Slots Invisíveis de Marca (Sem Cápsulas, Sem Cards, Sem Bordas, Sem Fundos)
+   Função estrita: Alinhamento vertical central e respiro visual generoso
+   ========================================================================== */
+
+.client-brand-slot {
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  flex-shrink: 0 !important;
+  flex-grow: 0 !important;
+  height: 80px;
+  background: transparent !important;
+  border: none !important;
+  box-shadow: none !important;
+  border-radius: 0 !important;
+  padding: 0 !important;
+  margin: 0 !important;
+  white-space: nowrap !important;
+}
+
+/* ==========================================================================
+   4. Imagens das Logos (Livremente Integradas à Composição Clara)
+   Máxima Nitidez em Superfície Clara
+   ========================================================================== */
+
+.client-brand-logo {
+  display: block;
+  object-fit: contain;
+  opacity: 0.85;
+  user-select: none;
+  pointer-events: auto;
+  cursor: default;
+  transition: 
+    opacity var(--transition-fast),
+    transform var(--transition-fast);
+}
+
+.client-brand-slot:hover .client-brand-logo {
+  opacity: 1;
+  transform: scale(1.05);
+}
+
+/* ==========================================================================
+   6. Sistema de Tamanho Óptico (Equilíbrio de Peso Visual Entre Formatos Distintos)
+   ========================================================================== */
+
+/* Grupo 1: WORDMARK / HORIZONTAL (Logos largas com nome tipográfico) */
+.slot-wordmark .logo-via-br {
+  height: 25px;
+  width: auto;
+  max-width: 140px;
+}
+
+.slot-wordmark .logo-vorren {
+  height: 22px;
+  width: auto;
+  max-width: 130px;
+}
+
+/* Grupo 2: EMBLEM / SÍMBOLO (Logos quadradas, circulares ou badges) */
+.slot-emblem .logo-adbrindes {
+  height: 44px;
+  width: auto;
+  max-width: 130px;
+}
+
+.slot-emblem .logo-nickconsult {
+  height: 44px;
+  width: auto;
+  max-width: 150px;
+}
+
+.slot-emblem .logo-camifio {
+  height: 46px;
+  width: auto;
+  max-width: 130px;
+}
+
+.slot-emblem .logo-eurocorp {
+  height: 38px;
+  width: auto;
+  max-width: 140px;
+}
+
+/* Grupo 3: COMPACT (Logos intermediárias com proporção mista) */
+.slot-compact .logo-armacham {
+  height: 36px;
+  width: auto;
+  max-width: 110px;
+}
+
+.slot-compact .logo-tricell {
+  height: 30px;
+  width: auto;
+  max-width: 120px;
+}
+
+/* ==========================================================================
+   5. Responsividade Rigorosa
+   STRICTLY 1 ÚNICA LINHA HORIZONTAL CONTÍNUA (Desktop, Tablet e Mobile)
+   ========================================================================== */
+
+/* Tablets (até 1024px) */
+@media (max-width: 1024px) {
+  .clients-institutional-section {
+    padding: 4rem 0 4.5rem 0;
+  }
+
+  .clients-header-center {
+    margin-bottom: 2.5rem;
+  }
+
+  .clients-marquee-track {
+    gap: 52px;
+    animation-duration: 40s !important;
+  }
+
+  .client-brand-slot {
+    height: 76px;
+  }
+
+  /* Ajuste proporcional nos tamanhos ópticos */
+  .slot-wordmark .logo-via-br { height: 21px; max-width: 120px; }
+  .slot-wordmark .logo-vorren { height: 18px; max-width: 110px; }
+
+  .slot-emblem .logo-adbrindes { height: 38px; width: 38px; }
+  .slot-emblem .logo-nickconsult { height: 38px; width: 38px; }
+  .slot-emblem .logo-camifio { height: 40px; width: 40px; }
+  .slot-emblem .logo-eurocorp { height: 40px; width: 40px; }
+
+  .slot-compact .logo-armacham { height: 30px; max-width: 52px; }
+  .slot-compact .logo-tricell { height: 25px; max-width: 95px; }
+}
+
+/* Smartphones (até 768px) */
+@media (max-width: 768px) {
+  .clients-institutional-section {
+    padding: 3.25rem 0 3.75rem 0;
+  }
+
+  .clients-header-center {
+    margin-bottom: 2rem;
+  }
+
+  .clients-caption-title {
+    font-size: 0.65rem;
+    letter-spacing: 0.18em;
+  }
+
+  .clients-marquee-track {
+    gap: 40px;
+    animation-duration: 32s !important;
+  }
+
+  .client-brand-slot {
+    height: 60px;
+  }
+
+  /* Calibragem compacta proporcional para smartphone */
+  .slot-wordmark .logo-via-br { height: 18px; max-width: 95px; }
+  .slot-wordmark .logo-vorren { height: 15px; max-width: 85px; }
+
+  .slot-emblem .logo-adbrindes { height: 32px; width: 32px; }
+  .slot-emblem .logo-nickconsult { height: 32px; width: 32px; }
+  .slot-emblem .logo-camifio { height: 34px; width: 34px; }
+  .slot-emblem .logo-eurocorp { height: 34px; width: 34px; }
+
+  .slot-compact .logo-armacham { height: 25px; max-width: 44px; }
+  .slot-compact .logo-tricell { height: 21px; max-width: 80px; }
+}
+
+/* Smartphones Pequenos (320px - 430px) */
+@media (max-width: 430px) {
+  .clients-caption-title {
+    font-size: 0.6rem;
+    letter-spacing: 0.16em;
+  }
+
+  .clients-marquee-track {
+    gap: 28px;
+    animation-duration: 28s !important;
+  }
+
+  .client-brand-slot {
+    height: 52px;
+  }
+
+  .slot-wordmark .logo-via-br { height: 16px; max-width: 85px; }
+  .slot-wordmark .logo-vorren { height: 13px; max-width: 75px; }
+
+  .slot-emblem .logo-adbrindes { height: 28px; width: 28px; }
+  .slot-emblem .logo-nickconsult { height: 28px; width: 28px; }
+  .slot-emblem .logo-camifio { height: 30px; width: 30px; }
+  .slot-emblem .logo-eurocorp { height: 30px; width: 30px; }
+
+  .slot-compact .logo-armacham { height: 22px; max-width: 38px; }
+  .slot-compact .logo-tricell { height: 18px; max-width: 70px; }
+}

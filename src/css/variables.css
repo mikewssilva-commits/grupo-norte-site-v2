@@ -1,0 +1,109 @@
+/* ==========================================================================
+   GRUPO NORTE — Design System & Sistema Cromático Oficial
+   Direção de Arte: Institucional, Claro, Premium e Minimalista (Apple-Grade)
+   Identidade: Superfícies Claras Rítmicas, Azul-Marinho Profundo, Laranja Oficial
+   ========================================================================== */
+
+:root {
+  /* ========================================================================
+     1. Cores Primárias da Marca (Identidade Oficial Grupo Norte)
+     ======================================================================== */
+  --brand-primary: #0A1E2B;             /* Azul-Marinho Institucional Oficial */
+  --brand-primary-rgb: 10, 30, 43;
+  --brand-secondary: #102B3C;           /* Marinho de Transição */
+  --brand-secondary-rgb: 16, 43, 60;
+  --brand-dark-deep: #05121A;           /* Tom profundo para CTA Final e Footer */
+  --brand-dark-surface: #091C27;        /* Superfície escura fechada */
+
+  /* Acento Vibrante (Laranja Oficial Grupo Norte — Uso Controlado e Cirúrgico) */
+  --brand-accent: #FF6A00;              /* Laranja oficial do símbolo */
+  --brand-accent-rgb: 255, 106, 0;
+  --brand-accent-hover: #E85C00;
+  --brand-accent-active: #CC5200;
+  --brand-accent-glow: rgba(255, 106, 0, 0.25);
+
+  /* Variações de Intensidade da Cor de Acento */
+  --brand-accent-70: rgba(255, 106, 0, 0.70);
+  --brand-accent-20: rgba(255, 106, 0, 0.20);
+  --brand-accent-soft: rgba(255, 106, 0, 0.08);
+  --brand-accent-subtle: rgba(255, 106, 0, 0.03);
+
+  /* Variações de Intensidade da Cor Primária Institucional */
+  --brand-primary-90: rgba(10, 30, 43, 0.90);
+  --brand-primary-70: rgba(10, 30, 43, 0.70);
+  --brand-primary-40: rgba(10, 30, 43, 0.40);
+  --brand-primary-20: rgba(10, 30, 43, 0.20);
+  --brand-primary-10: rgba(10, 30, 43, 0.10);
+  --brand-primary-05: rgba(10, 30, 43, 0.04);
+  --brand-primary-03: rgba(10, 30, 43, 0.025);
+
+  /* ========================================================================
+     2. Superfícies & Ritmo Visual (Transição Rítmica entre Superfícies Claras)
+     ======================================================================== */
+  --bg-page: #F7F7F5;                   /* Fundo base off-white refinado */
+  --bg-header: rgba(247, 247, 245, 0.88); /* Header claro translúcido */
+  --bg-header-scrolled: rgba(255, 255, 255, 0.94);
+  --bg-hero: #F7F7F5;                   /* 01. Hero: Off-white sofisticado */
+  --bg-hero-subtle: #F0F2F4;            /* Variação sutil no hero */
+  --bg-clients: #EEF2F6;                /* 02. Clientes: Cinza/off-white tonalizado suave */
+  --bg-solutions: #FFFFFF;              /* 03. Soluções (Abertura): Branco puro */
+  --bg-solutions-stage: #F8FAFC;        /* Palco visual técnico claro */
+  --bg-portfolio: #F7F7F5;              /* 04. Projetos: Off-white editorial */
+  --bg-process: #FFFFFF;                /* 05. Processo: Branco puro */
+  --bg-about: #F0F4F8;                  /* 06. Grupo Norte (Sobre): Tonalizado claro */
+  --bg-cta: #071A26;                    /* 07. CTA Final: Azul-marinho institucional nobre */
+  --bg-footer: #040D14;                 /* 08. Footer: Azul-marinho profundo */
+
+  /* Superfícies de Cartões e Painéis */
+  --bg-surface-white: #FFFFFF;
+  --bg-surface-offwhite: #F8F9FA;
+  --bg-surface-tinted: #F1F4F8;
+  --bg-surface-elevated: #FFFFFF;
+
+  /* ========================================================================
+     3. Tipografia & Hierarquia de Alto Contraste Institucional
+     ======================================================================== */
+  /* Textos sobre Superfícies Claras */
+  --color-heading: #0A1E2B;             /* Azul-marinho quase preto (máxima autoridade) */
+  --color-body: #334756;                /* Grafite corporativo equilibrado */
+  --color-muted: #627584;               /* Ardósia neutro para legendas e kickers */
+  --color-faint: #9AA8B4;               /* Detalhes e divisores sutis */
+
+  /* Textos sobre Superfícies Escuras (CTA Final e Footer) */
+  --color-text-dark-hero: #FFFFFF;
+  --color-text-dark-body: #C2D1DE;
+  --color-text-dark-muted: #8397A8;
+  --color-text-dark-faint: #4E6574;
+
+  /* ========================================================================
+     4. Bordas e Linhas de Precisão Milimétrica
+     ======================================================================== */
+  --border-subtle: rgba(10, 30, 43, 0.07);
+  --border-light: rgba(10, 30, 43, 0.12);
+  --border-medium: rgba(10, 30, 43, 0.18);
+  --border-brand-accent: rgba(255, 106, 0, 0.35);
+
+  --border-dark-subtle: rgba(255, 255, 255, 0.08);
+  --border-dark-medium: rgba(255, 255, 255, 0.15);
+
+  /* ========================================================================
+     5. Sombras & Profundidade (Apple-grade: Delicadas e Naturais)
+     ======================================================================== */
+  --shadow-subtle: 0 2px 8px rgba(10, 30, 43, 0.04);
+  --shadow-card: 0 8px 24px -6px rgba(10, 30, 43, 0.06), 0 0 0 1px rgba(10, 30, 43, 0.04);
+  --shadow-card-hover: 0 16px 36px -8px rgba(10, 30, 43, 0.09), 0 0 0 1px rgba(10, 30, 43, 0.08);
+  --shadow-display: 0 28px 70px -16px rgba(10, 30, 43, 0.10), 0 0 0 1px rgba(10, 30, 43, 0.06);
+  --shadow-accent-cta: 0 6px 20px -2px rgba(255, 106, 0, 0.32);
+
+  /* Tipografia Base */
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'Inter', system-ui, sans-serif;
+
+  /* Grid & Dimensões */
+  --container-width: 1320px;
+  --header-height: 72px;
+
+  /* Transições Naturais */
+  --ease-natural: cubic-bezier(0.25, 1, 0.5, 1);
+  --transition-fast: 200ms var(--ease-natural);
+  --transition-smooth: 400ms var(--ease-natural);
+}

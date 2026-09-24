@@ -1,0 +1,415 @@
+/* ==========================================================================
+   GRUPO NORTE — Vitrine Digital de Projetos (Marquee Híbrido: Auto + Drag Manual)
+   Direção de Arte: Fundo Azul-Marinho Sofisticado (#091C27 / #06151E),
+   Título em Branco Puro, Cards Claros / Molduras Premium em Alto Contraste,
+   Projetos Passando Horizontalmente com Suporte a Drag Manual e Inércia.
+   ========================================================================== */
+
+.section-projects {
+  position: relative;
+  background: linear-gradient(180deg, #091C27 0%, #06151E 100%);
+  color: #FFFFFF;
+  padding: 105px 0 115px;
+  overflow: hidden;
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+  isolation: isolate;
+}
+
+/* ==========================================================================
+   Header Institucional da Seção (Título em Branco Sofisticado)
+   ========================================================================== */
+
+.projects-header-wrapper {
+  max-width: var(--container-width);
+  margin: 0 auto 46px;
+  padding: 0 40px;
+}
+
+.projects-header-content {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 860px;
+}
+
+.projects-label-container {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-label {
+  font-size: 0.8125rem;
+  font-weight: 700;
+  letter-spacing: 0.24em;
+  text-transform: uppercase;
+  color: var(--brand-accent);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.projects-label::before {
+  content: '';
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--brand-accent);
+  box-shadow: 0 0 10px var(--brand-accent);
+}
+
+.projects-count-pill {
+  font-size: 0.6875rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 3px 10px;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.07);
+  color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.projects-headline {
+  font-size: clamp(2.2rem, 3.8vw, 3.6rem);
+  font-weight: 800;
+  line-height: 1.15;
+  letter-spacing: -0.035em;
+  color: #FFFFFF;
+  margin: 0;
+}
+
+.projects-headline .headline-dim {
+  color: rgba(255, 255, 255, 0.52);
+  font-weight: 700;
+}
+
+.projects-subheadline {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: #B4C6D5;
+  max-width: 680px;
+  margin-top: 4px;
+}
+
+/* ==========================================================================
+   Viewport do Marquee Horizontal com Suporte a Drag Manual
+   - Sem fade excessivo (sem máscaras de corte artificial)
+   - Largura estendida até as bordas físicas da tela (100vw)
+   - Cursor grab e touch-action pan-y para rolagem vertical normal da página
+   ========================================================================== */
+
+.projects-marquee-viewport {
+  position: relative;
+  width: 100vw;
+  max-width: 100vw;
+  margin-left: calc(50% - 50vw);
+  margin-right: calc(50% - 50vw);
+  overflow: hidden;
+  display: flex !important;
+  flex-direction: row !important;
+  align-items: stretch !important;
+  padding: 16px 0 20px;
+  mask-image: none !important;
+  -webkit-mask-image: none !important;
+  cursor: grab;
+  touch-action: pan-y;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.projects-marquee-viewport.is-dragging,
+.projects-marquee-viewport.is-dragging * {
+  cursor: grabbing !important;
+}
+
+/* Trilho Principal renderizado via GPU Compositing */
+.projects-marquee-track {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  width: max-content !important;
+  white-space: nowrap !important;
+  will-change: transform;
+  transform: translate3d(0, 0, 0);
+}
+
+/* Grupo A e Grupo B: rigorosamente idênticos em largura, gap e padding-right */
+.projects-marquee-group {
+  display: flex !important;
+  flex-direction: row !important;
+  flex-wrap: nowrap !important;
+  align-items: flex-start !important;
+  gap: 64px;
+  padding-right: 64px;
+  flex-shrink: 0 !important;
+}
+
+/* ==========================================================================
+   Cards Claros / Molduras Premium
+   Destacam-se com sofisticação sobre o fundo azul-marinho
+   Largura: 480px no desktop (faixa sugerida de 420px a 560px)
+   ========================================================================== */
+
+.project-marquee-card {
+  position: relative;
+  flex: 0 0 480px;
+  width: 480px;
+  max-width: 480px;
+  min-width: 480px;
+  box-sizing: border-box;
+  background-color: #FFFFFF;
+  border-radius: 18px;
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  box-shadow: 
+    0 24px 60px -12px rgba(0, 0, 0, 0.45),
+    0 4px 14px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.08);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  outline: none;
+  cursor: grab;
+  transition: 
+    transform 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    box-shadow 0.4s cubic-bezier(0.16, 1, 0.3, 1),
+    border-color 0.3s ease;
+  user-select: none;
+}
+
+.projects-marquee-viewport.is-dragging .project-marquee-card {
+  cursor: grabbing !important;
+}
+
+/* Hover no Desktop: Leve Zoom, Pequena Elevação e Destaque */
+.project-marquee-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 36px 80px -16px rgba(0, 0, 0, 0.65),
+    0 8px 24px rgba(0, 0, 0, 0.35),
+    0 0 0 1px rgba(255, 255, 255, 0.25);
+  border-color: rgba(255, 255, 255, 0.35);
+  z-index: 5;
+}
+
+.project-marquee-card:focus-visible {
+  border-color: var(--brand-accent);
+  box-shadow: 
+    0 0 0 3px var(--brand-accent-glow),
+    0 28px 60px rgba(0, 0, 0, 0.5);
+}
+
+/* ==========================================================================
+   Moldura Elegante do Projeto (Frame com Barra Minimalista Clara)
+   ========================================================================== */
+
+.project-frame {
+  position: relative;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  background-color: #F8FAFC;
+}
+
+.project-frame-bar {
+  height: 40px;
+  padding: 0 16px;
+  display: flex;
+  align-items: center;
+  position: relative;
+  background-color: #F8FAFC;
+  border-bottom: 1px solid rgba(10, 30, 43, 0.08);
+}
+
+.project-frame-dots {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  position: absolute;
+  left: 16px;
+  z-index: 1;
+}
+
+.p-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.85;
+}
+
+.p-dot-close { background-color: #FF5F56; }
+.p-dot-min { background-color: #FFBD2E; }
+.p-dot-max { background-color: #27C93F; }
+
+/* Cápsula de URL Minimalista Centralizada */
+.project-frame-url {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  background-color: #FFFFFF;
+  border: 1px solid rgba(10, 30, 43, 0.08);
+  border-radius: 16px;
+  padding: 2px 12px;
+  max-width: 220px;
+  overflow: hidden;
+  margin: 0 auto;
+}
+
+.url-lock-icon {
+  color: #10B981;
+  flex-shrink: 0;
+}
+
+.url-text {
+  font-size: 0.6875rem;
+  font-weight: 500;
+  color: #475569;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.project-badge-concept {
+  display: none;
+}
+
+/* ==========================================================================
+   Preview Grande do Projeto
+   Altura proporcional, sem deformações, mantendo fidelidade total
+   ========================================================================== */
+
+.project-preview-viewport {
+  position: relative;
+  width: 100%;
+  height: 520px;
+  overflow: hidden;
+  background-color: #05131C;
+}
+
+.project-preview-canvas {
+  width: 100%;
+  height: 100%;
+}
+
+.project-picture {
+  width: 100%;
+  height: 100%;
+  display: block;
+}
+
+.project-preview-img {
+  width: 100%;
+  height: 100%;
+  display: block;
+  object-fit: cover;
+  object-position: top center;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+  pointer-events: none;
+  -webkit-user-drag: none;
+  user-select: none;
+}
+
+.project-marquee-card:hover .project-preview-viewport:not(.is-scrollable) .project-preview-img {
+  transform: scale(1.025);
+}
+
+/* Para landing pages longas, rolagem suave revelando o restante da interface ao passar o cursor */
+.project-preview-viewport.is-scrollable .project-preview-canvas {
+  height: auto;
+  transform: translateY(0);
+  transition: transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform;
+}
+
+.project-preview-viewport.is-scrollable .project-preview-img {
+  height: auto;
+}
+
+.project-marquee-card:hover .project-preview-viewport.is-scrollable .project-preview-canvas {
+  transform: translateY(calc(-100% + 520px));
+  transition: transform 5.5s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+
+/* ==========================================================================
+   Responsividade Editorial (Mobile, Tablet e Telas Menores)
+   ========================================================================== */
+
+@media (max-width: 960px) {
+  .section-projects {
+    padding: 80px 0 90px;
+  }
+
+  .projects-header-wrapper {
+    padding: 0 24px;
+    margin-bottom: 36px;
+  }
+
+  .projects-marquee-group {
+    gap: 44px;
+    padding-right: 44px;
+  }
+
+  .project-marquee-card {
+    flex: 0 0 380px;
+    width: 380px;
+    max-width: 380px;
+    min-width: 380px;
+  }
+
+  .project-preview-viewport {
+    height: 440px;
+  }
+
+  .project-preview-viewport.is-scrollable:hover .project-preview-canvas {
+    transform: translateY(calc(-100% + 440px));
+  }
+}
+
+@media (max-width: 600px) {
+  .projects-header-wrapper {
+    padding: 0 18px;
+  }
+
+  .projects-marquee-group {
+    gap: 28px;
+    padding-right: 28px;
+  }
+
+  .project-marquee-card {
+    flex: 0 0 310px;
+    width: 310px;
+    max-width: 310px;
+    min-width: 310px;
+    border-radius: 14px;
+  }
+
+  .project-frame-bar {
+    height: 36px;
+    padding: 0 12px;
+  }
+
+  .project-frame-dots {
+    left: 12px;
+  }
+
+  .project-frame-url {
+    max-width: 150px;
+    padding: 2px 8px;
+  }
+
+  .project-preview-viewport {
+    height: 360px;
+  }
+
+  .project-preview-viewport.is-scrollable:hover .project-preview-canvas {
+    transform: translateY(calc(-100% + 360px));
+  }
+}
