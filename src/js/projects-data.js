@@ -23,6 +23,7 @@ export const PROJECTS = [
     image: '/projects/lp-produto-designer.webp',
     fallbackImage: '/projects/lp-produto-designer.jpg',
     domain: 'digitaldesigner.design',
+    url: 'https://digitaldesigner.design',
     hasScroll: true
   },
   {
@@ -33,6 +34,7 @@ export const PROJECTS = [
     image: '/projects/lp-financas-dividendos.webp',
     fallbackImage: '/projects/lp-financas-dividendos.jpg',
     domain: 'dividendos.com.br',
+    url: 'https://dividendos.com.br',
     hasScroll: true
   },
   {
@@ -43,6 +45,7 @@ export const PROJECTS = [
     image: '/projects/lp-fitness-crossarena.webp',
     fallbackImage: '/projects/lp-fitness-crossarena.jpg',
     domain: 'crossarena.com',
+    url: 'https://crossarena.com',
     hasScroll: true
   },
   {
@@ -53,6 +56,7 @@ export const PROJECTS = [
     image: '/projects/lp-financas-gain10k.webp',
     fallbackImage: '/projects/lp-financas-gain10k.jpg',
     domain: 'semanagain10k.com.br',
+    url: 'https://semanagain10k.com.br',
     hasScroll: true
   },
   {
@@ -63,6 +67,7 @@ export const PROJECTS = [
     image: '/projects/lp-juridico-criminal.webp',
     fallbackImage: '/projects/lp-juridico-criminal.jpg',
     domain: 'attorneylaw.adv.br',
+    url: 'https://attorneylaw.adv.br',
     hasScroll: true
   },
   {
@@ -73,6 +78,7 @@ export const PROJECTS = [
     image: '/projects/lp-juridico-mentoria.webp',
     fallbackImage: '/projects/lp-juridico-mentoria.jpg',
     domain: 'joaoquintino.adv.br',
+    url: 'https://joaoquintino.adv.br',
     hasScroll: true
   },
   {
@@ -83,6 +89,7 @@ export const PROJECTS = [
     image: '/projects/lp-saude-posturologia.webp',
     fallbackImage: '/projects/lp-saude-posturologia.jpg',
     domain: 'posturologia.com.br',
+    url: 'https://posturologia.com.br',
     hasScroll: true
   },
   {
@@ -93,6 +100,7 @@ export const PROJECTS = [
     image: '/projects/lp-juridico-empresarial.webp',
     fallbackImage: '/projects/lp-juridico-empresarial.jpg',
     domain: 'assessoriajuridica.adv.br',
+    url: 'https://assessoriajuridica.adv.br',
     hasScroll: true
   }
 ];

@@ -1,22 +1,44 @@
 /**
- * GRUPO NORTE — Projects Showcase & Marquee Engine
- * Movimento contínuo infinito com suporte a arraste manual híbrido (Desktop drag & Mobile touch).
- * - Velocidade reduzida e elegante (40 a 60 segundos por ciclo)
- * - Arraste livre (esquerda/direita) via Pointer Events
- * - Inércia suave ao soltar
- * - Espera ~2 segundos após soltar e retoma aceleração suavemente
- * - Cursor grab / grabbing no desktop
- * - Loop infinito matemático sem cortes
+ * GRUPO NORTE — Projects & Portfolio Interactive Engine
+ * 
+ * Funcionalidades:
+ * 1. Vitrine de Sites & Sistemas com Mockups de Computador e Marquee Infinito Híbrido (Auto + Drag Manual)
+ * 2. Botões Rápidos de "Ver Projeto" abrindo em nova aba
+ * 3. Sistema de Filtros por Abas Interativas (Todos, Sites & Sistemas, Agentes de IA, Marketing & Tráfego)
+ * 4. Demonstração Interativa do Chat WhatsApp com Agente de IA e chips de respostas por nicho
  */
 
 import { PROJECTS } from './projects-data.js';
 
+// Base de respostas do Agente de IA para cada nicho comercial
+const AI_RESPONSES = {
+  delivery: {
+    user: 'Como o Agente IA funciona para Delivery e Restaurantes?',
+    ai: 'Para restaurantes e delivery, o Agente IA envia o cardápio interativo, anota pedidos complexos com adicionais, calcula taxa de entrega pelo CEP e envia o pedido pronto para a cozinha! Reduz o tempo de espera a zero em horários de pico. 🍕🛵'
+  },
+  saude: {
+    user: 'Vocês têm solução para Clínicas e Consultórios médicos?',
+    ai: 'Com certeza! Nosso agente faz triagem prévia do paciente, consulta a agenda dos médicos em tempo real, confirma consultas por WhatsApp e envia lembretes automáticos — reduzindo o no-show (faltas) em até 70%! 🩺📅'
+  },
+  imobiliaria: {
+    user: 'Como funciona a qualificação para Imobiliárias e Corretores?',
+    ai: 'A IA atua como pré-atendimento 24/7: identifica se o cliente quer comprar ou alugar, filtra faixa de preço, número de quartos e localização, envia opções compatíveis e já agenda a visita na pauta do corretor! 🏢🔑'
+  },
+  servicos: {
+    user: 'E para Prestadores de Serviço e Escritórios de Advocacia?',
+    ai: 'Para serviços e advocacia, o Agente IA realiza acolhimento imediato em menos de 3 segundos, coleta dados preliminares essenciais do caso com sigilo e encaminha o lead qualificado diretamente para a equipe comercial fechar! ⚖️💼'
+  }
+};
+
+/**
+ * 1. VITRINE DE SITES E SISTEMAS (CARROSSEL MARQUEE)
+ */
 export function initProjectsGallery() {
   const showcaseTrack = document.getElementById('projectsMarqueeTrack');
   const viewport = document.querySelector('.projects-marquee-viewport');
   if (!showcaseTrack || !viewport || !PROJECTS || PROJECTS.length === 0) return;
 
-  // Gerador de cada projeto individual
+  // Gerador de cada card individual de site com mockup de tela de computador
   const createProjectCard = (project, index) => {
     return `
       <article 
@@ -26,15 +48,16 @@ export function initProjectsGallery() {
         role="group" 
         aria-label="${project.title} — ${project.category}"
       >
-        <!-- Moldura Elegante do Projeto -->
+        <!-- Moldura de Computador / Janela de Navegador -->
         <div class="project-frame">
-          <!-- Barra Superior Minimalista -->
+          <!-- Barra Superior do Navegador -->
           <div class="project-frame-bar">
             <div class="project-frame-dots" aria-hidden="true">
               <span class="p-dot p-dot-close"></span>
               <span class="p-dot p-dot-min"></span>
               <span class="p-dot p-dot-max"></span>
             </div>
+            
             <div class="project-frame-url">
               <svg class="url-lock-icon" width="10" height="10" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                 <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
@@ -44,7 +67,7 @@ export function initProjectsGallery() {
             </div>
           </div>
 
-          <!-- Preview Grande do Site -->
+          <!-- Preview em Alta Fidelidade do Site -->
           <div class="project-preview-viewport ${project.hasScroll ? 'is-scrollable' : ''}">
             <div class="project-preview-canvas">
               <picture class="project-picture">
@@ -60,12 +83,21 @@ export function initProjectsGallery() {
               </picture>
             </div>
           </div>
+
+          <!-- Rodapé do Card com Título e Categoria -->
+          <div class="project-card-footer">
+            <div class="project-card-meta">
+              <h4 class="project-card-title">${project.title}</h4>
+              <span class="project-card-category">${project.category}</span>
+            </div>
+          </div>
+
         </div>
       </article>
     `;
   };
 
-  // Renderiza Grupo A e Grupo B rigorosamente idênticos para transição de loop infinito
+  // Renderiza Grupo A e Grupo B idênticos para transição de loop infinito
   const renderGroup = (isClone = false) => `
     <div class="projects-marquee-group" ${isClone ? 'aria-hidden="true"' : ''}>
       ${PROJECTS.map((p, idx) => createProjectCard(p, idx)).join('')}
@@ -74,15 +106,11 @@ export function initProjectsGallery() {
 
   showcaseTrack.innerHTML = renderGroup(false) + renderGroup(true);
 
-  // =========================================================================
-  // MOTOR DE MOVIMENTO HÍBRIDO (Marquee Suave + Arraste Manual com Inércia)
-  // =========================================================================
-
+  // Motor de física e movimento
   let currentX = 0;
   let singleGroupWidth = 0;
-  let targetSpeed = 80; // px por segundo (~45-55s por ciclo completo)
-  let resumeProgress = 1; // Rampa suave de aceleração (0 a 1)
-  
+  let targetSpeed = 80;
+  let resumeProgress = 1;
   let isDragging = false;
   let hasDragged = false;
   let isInteracting = false;
@@ -93,33 +121,30 @@ export function initProjectsGallery() {
   let velocity = 0;
   let resumeTimeout = null;
 
-  // Atualização precisa da largura de um ciclo completo
   const updateDimensions = () => {
     const groupA = showcaseTrack.querySelector('.projects-marquee-group');
     if (groupA) {
       singleGroupWidth = groupA.offsetWidth;
-      // Define a velocidade para completar um ciclo em ~48 segundos
       if (singleGroupWidth > 0) {
         targetSpeed = singleGroupWidth / 48;
       }
     }
   };
 
+  // Expõe updateDimensions para recálculo ao alternar abas
+  window.__refreshProjectsDimensions = updateDimensions;
+
   updateDimensions();
   window.addEventListener('load', updateDimensions);
 
-  // Observa mudanças de tela/orientação
   const groupA = showcaseTrack.querySelector('.projects-marquee-group');
   if (groupA && 'ResizeObserver' in window) {
     const resizeObs = new ResizeObserver(() => updateDimensions());
     resizeObs.observe(groupA);
   }
 
-  // 1. Início do Arraste (Pointer Down: Mouse, Touch ou Stylus)
   const onPointerDown = (e) => {
-    // Permite apenas clique primário (botão esquerdo) ou touch
     if (e.button !== undefined && e.button !== 0) return;
-
     isDragging = true;
     hasDragged = false;
     isInteracting = true;
@@ -135,40 +160,34 @@ export function initProjectsGallery() {
     startCurrentX = currentX;
     lastPointerX = e.clientX;
     lastPointerTime = performance.now();
-
     viewport.classList.add('is-dragging');
 
     try {
       viewport.setPointerCapture(e.pointerId);
     } catch {
-      // Ignora caso o navegador não suporte captura neste contexto
+      // Ignora caso não suporte
     }
   };
 
-  // 2. Movimento do Arraste (Pointer Move)
   const onPointerMove = (e) => {
     if (!isDragging) return;
-
     const dx = e.clientX - startPointerX;
     if (Math.abs(dx) > 5) {
       hasDragged = true;
     }
-
     currentX = startCurrentX + dx;
 
-    // Cálculo da velocidade instantânea para inércia natural
     const now = performance.now();
     const dt = now - lastPointerTime;
     if (dt > 0) {
       const instantVelocity = (e.clientX - lastPointerX) / (dt / 16.67);
-      velocity = velocity * 0.4 + instantVelocity * 0.6; // Suavização exponencial
+      velocity = velocity * 0.4 + instantVelocity * 0.6;
     }
 
     lastPointerX = e.clientX;
     lastPointerTime = now;
   };
 
-  // 3. Fim do Arraste (Pointer Up / Cancel)
   const onPointerUp = (e) => {
     if (!isDragging) return;
     isDragging = false;
@@ -179,20 +198,16 @@ export function initProjectsGallery() {
         viewport.releasePointerCapture(e.pointerId);
       }
     } catch {
-      // Ignora caso já liberado
+      // Ignora
     }
 
-    // Limita a velocidade máxima de inércia para evitar giros excessivos
     velocity = Math.max(-28, Math.min(28, velocity));
-
-    // Espera ~2 segundos após soltar para retomar a animação automática suavemente
     clearTimeout(resumeTimeout);
     resumeTimeout = setTimeout(() => {
       isInteracting = false;
     }, 2000);
   };
 
-  // Previne cliques acidentais em links ou cards caso o usuário estivesse apenas arrastando
   viewport.addEventListener('click', (e) => {
     if (hasDragged) {
       e.preventDefault();
@@ -205,17 +220,8 @@ export function initProjectsGallery() {
   viewport.addEventListener('pointerup', onPointerUp, { passive: true });
   viewport.addEventListener('pointercancel', onPointerUp, { passive: true });
 
-  // Pausa suave do marquee automático quando focado por teclado (Acessibilidade)
-  viewport.addEventListener('focusin', () => {
-    isInteracting = true;
-  });
-  viewport.addEventListener('focusout', () => {
-    isInteracting = false;
-  });
-
-  // =========================================================================
-  // LOOP DE ANIMAÇÃO DE ALTA PERFORMANCE (requestAnimationFrame com GPU)
-  // =========================================================================
+  viewport.addEventListener('focusin', () => { isInteracting = true; });
+  viewport.addEventListener('focusout', () => { isInteracting = false; });
 
   let lastFrameTime = performance.now();
 
@@ -224,25 +230,22 @@ export function initProjectsGallery() {
     lastFrameTime = now;
 
     if (!isDragging) {
-      // Aplica desaceleração suave da inércia
       if (Math.abs(velocity) > 0.15) {
         currentX += velocity * (deltaSeconds * 60);
-        velocity *= 0.93; // Fator de atrito natural
+        velocity *= 0.93;
       } else {
         velocity = 0;
       }
 
-      // Se o usuário não está interagindo e os 2s passaram, retoma suavemente
       if (!isInteracting) {
         if (resumeProgress < 1) {
-          resumeProgress = Math.min(1, resumeProgress + deltaSeconds * 0.7); // Rampa suave de ~1.4s
+          resumeProgress = Math.min(1, resumeProgress + deltaSeconds * 0.7);
         }
         const activeSpeed = targetSpeed * resumeProgress;
         currentX -= activeSpeed * deltaSeconds;
       }
     }
 
-    // Envolvimento Matemático Infinito sem Saltos
     if (singleGroupWidth > 0) {
       while (currentX <= -singleGroupWidth) {
         currentX += singleGroupWidth;
@@ -252,11 +255,225 @@ export function initProjectsGallery() {
       }
     }
 
-    // Renderização com GPU Compositing direto em translate3d
     showcaseTrack.style.transform = `translate3d(${currentX.toFixed(2)}px, 0, 0)`;
-
     requestAnimationFrame(animationLoop);
   };
 
   requestAnimationFrame(animationLoop);
+}
+
+/**
+ * 2. SISTEMA DE ABAS (FILTROS DE CATEGORIA)
+ */
+export function initProjectsTabs() {
+  const tabButtons = document.querySelectorAll('.projects-tab-btn');
+  const panels = document.querySelectorAll('.projects-tab-panel');
+  if (!tabButtons.length || !panels.length) return;
+
+  tabButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const selectedTab = btn.getAttribute('data-tab');
+
+      // Atualiza botões
+      tabButtons.forEach(b => {
+        const isActive = b === btn;
+        b.classList.toggle('active', isActive);
+        b.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
+
+      // Atualiza visibilidade dos painéis
+      panels.forEach(panel => {
+        const category = panel.getAttribute('data-category');
+        if (selectedTab === 'all' || category === selectedTab) {
+          panel.classList.remove('is-hidden');
+          panel.classList.add('is-visible');
+        } else {
+          panel.classList.add('is-hidden');
+          panel.classList.remove('is-visible');
+        }
+      });
+
+      // Recalcula dimensões do carrossel caso a aba de sites volte a ser exibida
+      if (selectedTab === 'all' || selectedTab === 'sites') {
+        setTimeout(() => {
+          if (window.__refreshProjectsDimensions) {
+            window.__refreshProjectsDimensions();
+          }
+        }, 80);
+      }
+    });
+  });
+}
+
+/**
+ * 3. DEMONSTRAÇÃO INTERATIVA DO AGENTE DE IA (WHATSAPP SIMULATOR)
+ */
+export function initAIChatSimulation() {
+  const chatMessagesContainer = document.getElementById('aiChatMessages');
+  const statusIndicator = document.getElementById('aiChatStatus');
+  const chipButtons = document.querySelectorAll('.ai-chat-chip');
+  const resetBtn = document.getElementById('aiChatResetBtn');
+  if (!chatMessagesContainer) return;
+
+  const getCurrentTime = () => {
+    const now = new Date();
+    return `${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+  };
+
+  const initialMessagesHtml = `
+    <!-- Aviso de Criptografia e IA -->
+    <div class="chat-system-notice">
+      <span>🔒 Mensagens protegidas por inteligência artificial do Grupo Norte</span>
+    </div>
+
+    <div class="chat-date-pill">
+      <span>HOJE</span>
+    </div>
+
+    <!-- Mensagem 1 (Cliente) -->
+    <div class="chat-msg chat-msg-user">
+      <div class="chat-bubble">
+        <p>Olá! Gostaria de entender como o Agente de IA funciona e se atende a minha empresa.</p>
+        <span class="chat-msg-time">${getCurrentTime()}</span>
+      </div>
+    </div>
+
+    <!-- Mensagem 2 (Agente IA) -->
+    <div class="chat-msg chat-msg-bot">
+      <div class="chat-bubble">
+        <p>Olá! Seja muito bem-vindo ao <strong>Grupo Norte</strong>! 🚀</p>
+        <p>Nosso Agente de IA é treinado exclusivamente com a base de conhecimento do seu negócio: cardápios, tabelas de preços, horários de atendimento e regras comerciais. Atende 24h por dia no seu WhatsApp sem filas!</p>
+        <div class="chat-msg-meta">
+          <span class="chat-msg-time">${getCurrentTime()}</span>
+          <span class="chat-check-read" aria-label="Lida">✓✓</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Mensagem 3 (Cliente) -->
+    <div class="chat-msg chat-msg-user">
+      <div class="chat-bubble">
+        <p>Vocês conseguem integrar direto com meu CRM ou agendamento no Google Agenda?</p>
+        <span class="chat-msg-time">${getCurrentTime()}</span>
+      </div>
+    </div>
+
+    <!-- Mensagem 4 (Agente IA) -->
+    <div class="chat-msg chat-msg-bot">
+      <div class="chat-bubble">
+        <p>Sim, com integração nativa! ⚡ O cliente tira dúvidas, escolhe o melhor horário e a IA já agenda direto no seu calendário ou CRM, enviando confirmação automática.</p>
+        <p>Clique em um dos segmentos abaixo para testar uma simulação real para o seu nicho 👇</p>
+        <div class="chat-msg-meta">
+          <span class="chat-msg-time">${getCurrentTime()}</span>
+          <span class="chat-check-read" aria-label="Lida">✓✓</span>
+        </div>
+      </div>
+    </div>
+  `;
+
+  // Inicializa o chat com as mensagens base
+  chatMessagesContainer.innerHTML = initialMessagesHtml;
+
+  let isTyping = false;
+
+  const scrollToBottom = () => {
+    chatMessagesContainer.scrollTop = chatMessagesContainer.scrollHeight;
+  };
+
+  // Envia resposta simulada
+  const triggerNicheResponse = (nicheKey) => {
+    if (isTyping || !AI_RESPONSES[nicheKey]) return;
+    isTyping = true;
+
+    const data = AI_RESPONSES[nicheKey];
+    const userTime = getCurrentTime();
+
+    // 1. Adiciona a mensagem do cliente
+    const userMsgEl = document.createElement('div');
+    userMsgEl.className = 'chat-msg chat-msg-user is-new';
+    userMsgEl.innerHTML = `
+      <div class="chat-bubble">
+        <p>${data.user}</p>
+        <span class="chat-msg-time">${userTime}</span>
+      </div>
+    `;
+    chatMessagesContainer.appendChild(userMsgEl);
+    scrollToBottom();
+
+    // 2. Atualiza o status para "digitando..." e cria balão de digitação
+    if (statusIndicator) {
+      statusIndicator.textContent = 'digitando...';
+      statusIndicator.classList.add('is-typing');
+    }
+
+    const typingEl = document.createElement('div');
+    typingEl.className = 'chat-msg chat-msg-bot chat-typing-bubble';
+    typingEl.id = 'chatTypingBubble';
+    typingEl.innerHTML = `
+      <div class="chat-bubble typing-dots">
+        <span></span>
+        <span></span>
+        <span></span>
+      </div>
+    `;
+    chatMessagesContainer.appendChild(typingEl);
+    scrollToBottom();
+
+    // 3. Após 850ms, remove digitação e insere resposta da IA
+    setTimeout(() => {
+      const activeTyping = document.getElementById('chatTypingBubble');
+      if (activeTyping) activeTyping.remove();
+
+      if (statusIndicator) {
+        statusIndicator.textContent = 'Online';
+        statusIndicator.classList.remove('is-typing');
+      }
+
+      const botTime = getCurrentTime();
+      const botMsgEl = document.createElement('div');
+      botMsgEl.className = 'chat-msg chat-msg-bot is-new';
+      botMsgEl.innerHTML = `
+        <div class="chat-bubble">
+          <p>${data.ai}</p>
+          <div class="chat-msg-meta">
+            <span class="chat-msg-time">${botTime}</span>
+            <span class="chat-check-read" aria-label="Lida">✓✓</span>
+          </div>
+        </div>
+      `;
+      chatMessagesContainer.appendChild(botMsgEl);
+      scrollToBottom();
+      isTyping = false;
+    }, 850);
+  };
+
+  chipButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const niche = btn.getAttribute('data-niche');
+      if (niche) {
+        triggerNicheResponse(niche);
+      }
+    });
+  });
+
+  if (resetBtn) {
+    resetBtn.addEventListener('click', () => {
+      chatMessagesContainer.innerHTML = initialMessagesHtml;
+      if (statusIndicator) {
+        statusIndicator.textContent = 'Online';
+        statusIndicator.classList.remove('is-typing');
+      }
+      isTyping = false;
+      scrollToBottom();
+    });
+  }
+}
+
+/**
+ * Inicializador Geral do Módulo de Projetos
+ */
+export function initProjectsModule() {
+  initProjectsGallery();
+  initProjectsTabs();
+  initAIChatSimulation();
 }
